@@ -11,7 +11,9 @@ int GetNumber(string message)
     int value;
     Console.WriteLine(message);
     string str = Console.ReadLine();
-    value = Convert.ToInt32(str);
+    value = Convert.ToInt32(str); // я бы использовал int.TryParse() для того, чтобы запросить овторный ввод, если введены кракозябры
+    // ввод отрицательного числа или нуля ломает всю программу. Тоже надо проверить и запросить повторно
+    // также было бы неплохо ограничить вводимый максимум, допустим, 100, а то это тоже может привести к неприятностям
     return value;
 }
 (int row1,int column1,int row2,int column2) GetMatrixesDimentions()
@@ -64,7 +66,7 @@ void PrintMatrix(int[,] matrix)
 int [,] MultMatrix(int [,] matrix1, int [,] matrix2)
 {
     int [,] mult = new int[matrix1.GetLength(0),matrix2.GetLength(1)];
-    int sum=0;
+    int sum=0; // эта переменная может быть объявлена внутри цикла по j. Тогда не нужно будет каждый раз обнулять
     for (int i = 0; i < mult.GetLength(0); i++)
     {
         for (int j = 0; j < mult.GetLength(1); j++)
@@ -81,7 +83,7 @@ int [,] MultMatrix(int [,] matrix1, int [,] matrix2)
 
 int [,] matrix1 =InitMatrix(row1,column1);
 PrintMatrix(matrix1);
-Console.WriteLine();
+Console.WriteLine(); // кажется, что эту строку уже можно внести в PrintMatrix, ибо пишется после каждого вызова (ну а в конце не критично)
 
 int [,] matrix2 =InitMatrix(row2,column2);
 PrintMatrix(matrix2);
