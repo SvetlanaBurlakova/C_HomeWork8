@@ -9,6 +9,8 @@ int[,] InitMatrix()
     int[,] matrix = new int[4,4];
     int number=1;  
     int count=0;
+    // 1) интересный способ :D я бы использовал что-то типа diameterNumber.
+    // 2) вместо matrix.GetLength(0)*matrix.GetLength(1) можно просто matrix.Length - это то же самое
     while (number<=matrix.GetLength(0)*matrix.GetLength(1))
     {
         for (int j = count; j < matrix.GetLength(1)-count; j++)
@@ -16,7 +18,7 @@ int[,] InitMatrix()
             matrix[count,j] = number;
             number+=1;
         }
-        count+=1;
+        count+=1; // можно написать без этой переменной вообще, попробуй) она лишняя
         for (int j = count; j <= matrix.GetLength(0)-count; j++)
         {
             matrix[j,matrix.GetLength(1)-count] = number;

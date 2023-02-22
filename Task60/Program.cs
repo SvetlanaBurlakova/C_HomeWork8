@@ -19,14 +19,23 @@ int[,,] InitMatrix()
         {
             for (int k = 0; k < matrix.GetLength(2); k++)
             {
+                // 1) можно использовать HashSet, будет выглядеть проще (уже показывал)
+                // 2) можно переписать как цикл do-while - будет на одно одинаковое действие меньше:
+                // int number;
+                // do
+                // {
+                //     number = rnd.Next(10,100);
+                // }
+                // while (Array.Exists(numbers,x => x == number));
+                
                 number=rnd.Next(10,100);
                 
-                while (Array.Exists(numbers,x=> x==number)) 
+                while (Array.Exists(numbers,x=> x==number))  // сделим за красивыми пробельчиками :)
                 {
                      number=rnd.Next(10,100);   
                 }
                 matrix[i,j,k] = number;
-                numbers[count]=number;
+                numbers[count]=number; // вместо массива лучше использовать List<int>. Тогда можно будет просто добавить numbers.Add(count);
                 count +=1;
             }
         }
@@ -43,7 +52,7 @@ void PrintMatrix(int[,,] matrix)
             {
                 Console.Write($"{matrix[i,j,k]}({i},{j},{k}) ");
             }
-        Console.WriteLine();
+        Console.WriteLine(); // следим за отступами, как в Pythion, так и в C# :)
         }
     }
 }

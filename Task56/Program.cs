@@ -23,6 +23,7 @@ int[,] InitMatrix()
 
     return matrix;
 }
+// тоже пустые строки между методами :)
 void PrintMatrix(int[,] matrix)
 {
     for (int i = 0; i < matrix.GetLength(0); i++)
@@ -41,9 +42,9 @@ int SumElements(int[] array)
     for (int i = 0; i < array.Length; i++) sum+=array[i];
     return sum;
 }
-int MinArray(int[]array)
+int MinArray(int[]array) // советую называть методы более понятно. например это имя не говорит, что мы возвращаем именно индекс. GetIndexOfMinElement будет лучше
 {
-    int min= array[0];
+    int min= array[0]; // старайся одинаково проставлять пробельчики до и после операторов = < > и т.п. - хороший тон форматирования
     int minIndex=0;
     for (int i = 1; i < array.Length; i++) 
     {
@@ -55,17 +56,20 @@ int MinArray(int[]array)
     }
     return minIndex;
 }
-int MinSum(int [,]matrix)
+int MinSum(int [,]matrix) // тут тоже не понятно по имени метода, что возвращается именно индекс :)
 {
+    // вместо создания массива сумм, можно старзу находить минимальную :)
     int[] sum = new int[matrix.GetLength(0)];
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
+        // я бы не стал создавать новый массив и копировать элементы каждый раз, когда нужно просуммировать строку.
+        // Можно прямо в матрице, обращаясь ко всем [i, j] где i будет постоянно
         int [] array=new int[matrix.GetLength(1)];
         for (int j = 0; j < matrix.GetLength(1); j++)  array[j]=matrix[i,j];
-        sum[i]=SumElements(array);
+        sum[i]=SumElements(array); // этот метод не нужен, есть встроенный array.Sum() (нужно добавить "using System.Linq;" в самом верху файла)
     }
     int minSum=MinArray(sum);
-    return minSum;
+    return minSum; // можно написать просто return MinArray(sum);
 }
 int[,] matrix = InitMatrix();
 PrintMatrix(matrix);
